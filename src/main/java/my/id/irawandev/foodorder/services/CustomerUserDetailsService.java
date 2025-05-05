@@ -3,7 +3,6 @@ package my.id.irawandev.foodorder.services;
 import my.id.irawandev.foodorder.enums.USER_ROLE;
 import my.id.irawandev.foodorder.models.User;
 import my.id.irawandev.foodorder.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,11 @@ import java.util.List;
 
 @Service
 public class CustomerUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public CustomerUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
